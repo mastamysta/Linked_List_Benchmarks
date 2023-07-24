@@ -1,3 +1,5 @@
+#include <iostream>
+
 #include "vector_store.h"
 
 void Vector_store::append(int value)
@@ -19,3 +21,14 @@ size_t Vector_store::linear_search(int value)
         
     return -1;
 }
+
+size_t Vector_store::get_size()
+{
+    return store.size();
+}
+
+std::vector<int>* Vector_store::get_data_as_vector()
+{
+    return &store;
+}
+    

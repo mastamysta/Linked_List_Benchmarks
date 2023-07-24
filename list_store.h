@@ -12,6 +12,8 @@ public:
     void append(int value);
     void insert_at_index(size_t index, int value);
     size_t linear_search(int value);
+    size_t get_size();
+    std::vector<int>* get_data_as_vector();
 private:
     Node* head;
 };

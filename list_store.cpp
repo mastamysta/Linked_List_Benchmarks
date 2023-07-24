@@ -11,6 +11,11 @@ public:
         next = nullptr;
     }
     
+    int get_value()
+    {
+        return node_value;
+    }
+    
     void set_next(Node* n)
     {
         next = n;
@@ -41,7 +46,7 @@ void List_store::append(int value)
         return;
     }
     
-    Node *curr;
+    Node *curr = head;
     
     while ((*curr).get_next() != nullptr)
         curr = (*curr).get_next();
@@ -53,29 +58,65 @@ void List_store::insert_at_index(size_t index, int value)
 {   
     Node *n = new Node(value);
     
-    if (head == nullptr)
+    if (head == nullptr && index != 0)
     {
-        if (index != 0)
-            std::cout << "Index " << index << " out of bounds of empty list store\n";
-        else
-            head = n;
+        std::cout << "Index " << index << " out of bounds of empty list store\n";
         
         return;
     }
     
+    Node* prev = nullptr;
+    Node* curr = head;
     
-    Node *curr = head;
-    
-    for(int i = 0; i < index; i++)
-    {    
-        curr = (*curr).get_next();
+    for (int i = 0; i < index; i ++)
+    {
+        prev = curr;
+        curr = curr->get_next();
     }
     
-    (*n).set_next((*curr).get_next());
-    (*curr).set_next(n);
+    if (prev)
+        prev->set_next(n);
+    else
+        head = n;
+    
+    n->set_next(curr);
+    
+    
 }
 
 size_t List_store::linear_search(int value)
 {
+    /* Not impl */
     return 0;
+}
+
+size_t List_store::get_size()
+{
+    size_t cnt = 0;
+    
+    Node *curr = head;
+    
+    while (curr != nullptr)
+    {
+        cnt += 1;
+        curr = (*curr).get_next();
+    }
+    
+    return cnt;
+}
+
+std::vector<int>* List_store::get_data_as_vector()
+{
+    std::vector<int>* ret = new std::vector<int>;
+    
+    Node *curr = head;
+    
+    while (curr != nullptr)
+    {
+        
+        (*ret).push_back(curr->get_value());
+        curr = curr->get_next();
+    }
+    
+    return ret;
 }
